@@ -1,12 +1,23 @@
-nano github-actions/package.json
 {
-  "name": "github-actions-demo",
+  "name": "github-actions",
   "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Tests passed!\" && exit 0",
-    "lint": "echo \"Linting completed!\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wasiqmahmood/github-actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wasiqmahmood/github-actions/issues"
+  },
+  "homepage": "https://github.com/wasiqmahmood/github-actions#readme",
   "devDependencies": {
-    "eslint": "^8.0.0"
+    "eslint": "^9.35.0"
   }
 }
