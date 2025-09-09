@@ -1,0 +1,12 @@
+nano github-actions/package.json
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Tests passed!\" && exit 0",
+    "lint": "echo \"Linting completed!\" && exit 0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
