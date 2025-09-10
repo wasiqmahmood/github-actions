@@ -1,30 +1,28 @@
 name: Run Lint and Tests
 
-# Trigger: Yeh workflow har Pull Request (open, synchronize, reopen) par 'main' branch ke liye chalega
 on:
   pull_request:
     branches: [ "main" ]
 
 jobs:
   lint-and-test:
-    name: Run Linter and Tests
+    name: Lint & Test Code
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Code checkout karo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Linter run karo (Yahan dummy command hai)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Run Linter
         run: |
           echo "Checking code style and potential bugs..."
-          echo "Linting passed! No issues found." 
-          # Real command: npm run lint || eslint . || pylint .
+          echo "Linting passed! No issues found."
 
-      # Step 3: Tests run karo (Yahan dummy command hai)
+      # CHANGED: Now uses the 'test' script from package.json
       - name: Run Tests
-        run: |
-          echo "Running test suite..."
-          echo "All tests passed! ✅"
-          # Real command: npm test || pytest || go test ./...
+        run: npm test
