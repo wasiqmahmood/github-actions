@@ -18,8 +18,8 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20.x'
-        cache: 'npm'
+      node-version: '20.x'
+      cache: ${{ contains(github.event.head_commit.message, 'package-lock.json') && 'npm' || '' }}
         
     - name: Check for package.json and setup
       run: |
@@ -41,6 +41,8 @@ jobs:
             }
           }' > package.json
           npm install
+          # Generate lock file for future runs
+          npm install --package-lock-only
         fi
       
     - name: Run Linting
