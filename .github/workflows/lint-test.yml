@@ -2,9 +2,9 @@ name: Lint and Test Pipeline
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]  # Only main branch
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]  # Only main branch
   workflow_dispatch:
 
 jobs:
@@ -18,8 +18,8 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-      node-version: '20.x'
-      cache: ${{ contains(github.event.head_commit.message, 'package-lock.json') && 'npm' || '' }}
+        node-version: '20.x'
+        cache: ${{ contains(github.event.head_commit.message, 'package-lock.json') && 'npm' || '' }}
         
     - name: Check for package.json and setup
       run: |
