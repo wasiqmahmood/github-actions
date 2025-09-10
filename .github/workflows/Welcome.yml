@@ -1,0 +1,22 @@
+name: Run Welcome Script
+
+# Trigger: Yeh workflow har 'push' par chalega
+on: [push]
+
+jobs:
+  run-script:
+    name: Run the welcome script
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Repository ka code checkout karo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: run.sh script ko executable banayo (Windows ke liye bhi compatible)
+      - name: Make script executable
+        run: chmod +x ./run.sh
+
+      # Step 3: Script run karo
+      - name: Execute Hello World Script
+        run: ./run.sh
