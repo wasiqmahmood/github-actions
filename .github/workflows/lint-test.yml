@@ -1,28 +1,35 @@
-name: Run Lint and Tests
+name: Lint
 
 on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  lint-and-test:
-    name: Lint & Test Code
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Check out Git repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: '20'
+          node-version: 12
 
-      - name: Run Linter
-        run: |
-          echo "Checking code style and potential bugs..."
-          echo "Linting passed! No issues found."
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        run: npm ci
 
-      # CHANGED: Now uses the 'test' script from package.json
-      - name: Run Tests
-        run: npm test
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          prettier: true
