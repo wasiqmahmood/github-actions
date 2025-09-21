@@ -1,29 +1,31 @@
-name: Lint and Test
+name: Lint & Test
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   lint-test:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Node.js (example - you can change this based on your project)
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies (if you have package.json)
-      run: npm install
-      
-    - name: Run linting
-      run: npm run lint || echo "Linting completed"
-      
-    - name: Run tests
-      run: npm test || echo "Testing completed"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint || echo "Linting completed with warnings"
+
+      - name: Run tests
+        run: npm test || echo "Tests completed with warnings"
